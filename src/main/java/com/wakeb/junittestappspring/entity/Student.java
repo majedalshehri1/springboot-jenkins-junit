@@ -6,9 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+
 @Entity
 @Table(name = "student")
 public class Student {
@@ -20,4 +18,27 @@ public class Student {
     @Column(name = "student_name", length = Integer.MAX_VALUE)
     private String studentName;
 
+    public Student() {
+    }
+
+    public Student(Integer id, String studentName) {
+        this.id = id;
+        this.studentName = studentName;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
 }

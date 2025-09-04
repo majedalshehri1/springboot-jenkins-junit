@@ -1,52 +1,52 @@
 pipeline {
 	agent any
 
-	tools {
+    tools {
 		maven 'M3'
-		jdk 'JDK21'
-	}
+        jdk 'JDK21'
+    }
 
-	stages {
+    stages {
 		stage('Checkout') {
 			steps {
 				git branch: 'main',
-				url: 'https://github.com/majedalshehri1/springboot-jenkins-junit.git'
-			}
-		}
+                    url: 'https://github.com/majedalshehri1/springboot-jenkins-junit.git'
+            }
+        }
 
-		stage('Build') {
+        stage('Build') {
 			steps {
-				bat 'mvn clean compile'
-			}
-		}
+				sh 'mvn clean compile'
+            }
+        }
 
-		stage('Test') {
+        stage('Test') {
 			steps {
-				bat 'mvn test'
-			}
-			post {
+				sh 'mvn test'
+            }
+            post {
 				always {
 					junit 'target/surefire-reports/*.xml'
-				}
-			}
-		}
+                }
+            }
+        }
 
-		stage('Package') {
+        stage('Package') {
 			steps {
-				bat 'mvn package -DskipTests'
-			}
-		}
-	}
+				sh 'mvn package -DskipTests'
+            }
+        }
+    }
 
-	post {
+    post {
 		always {
 			cleanWs()
-		}
-		success {
+        }
+        success {
 			echo 'Pipeline completed successfully!'
-		}
-		failure {
+        }
+        failure {
 			echo 'Pipeline failed!'
-		}
-	}
+        }
+    }
 }
